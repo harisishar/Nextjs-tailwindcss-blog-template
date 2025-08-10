@@ -1,21 +1,63 @@
 <script>
   import { formatDate, slug } from '../../../utils/client.js';
+  import { 
+    generateSEOTitle, 
+    generateMetaDescription, 
+    generateOpenGraphData, 
+    generateTwitterCardData,
+    generateStructuredData,
+    generateCanonicalUrl
+  } from '../../../utils/seo.js';
+  import { page } from '$app/stores';
   
   export let data;
   
   $: ({ blog, isWordPress } = data);
+  
+  // Generate optimized SEO data
+  $: seoTitle = generateSEOTitle(blog.title);
+  $: metaDescription = generateMetaDescription(blog.description || blog.content);
+  $: ogData = generateOpenGraphData(blog);
+  $: twitterData = generateTwitterCardData(blog);
+  $: structuredData = generateStructuredData(blog);
+  $: canonicalUrl = generateCanonicalUrl($page.url.pathname);
 </script>
 
 <svelte:head>
-  <title>{blog.title}</title>
-  <meta name="description" content={blog.description} />
-  <meta property="og:title" content={blog.title} />
-  <meta property="og:description" content={blog.description} />
-  <meta property="og:image" content={blog.image?.src} />
-  <meta property="og:type" content="article" />
-  <meta property="article:author" content={blog.author} />
-  <meta property="article:published_time" content={blog.publishedAt} />
-  <meta name="twitter:card" content="summary_large_image" />
+  <title>{seoTitle}</title>
+  <meta name="description" content={metaDescription} />
+  <link rel="canonical" href={canonicalUrl} />
+  
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content={ogData.type} />
+  <meta property="og:url" content={ogData.url} />
+  <meta property="og:title" content={ogData.title} />
+  <meta property="og:description" content={ogData.description} />
+  <meta property="og:image" content={ogData.image} />
+  <meta property="og:site_name" content={ogData.site_name} />
+  {#if ogData['article:author']}
+    <meta property="article:author" content={ogData['article:author']} />
+  {/if}
+  {#if ogData['article:published_time']}
+    <meta property="article:published_time" content={ogData['article:published_time']} />
+  {/if}
+  {#if ogData['article:tag'] && Array.isArray(ogData['article:tag'])}
+    {#each ogData['article:tag'] as tag}
+      <meta property="article:tag" content={tag} />
+    {/each}
+  {/if}
+  
+  <!-- Twitter -->
+  <meta name="twitter:card" content={twitterData.card} />
+  <meta name="twitter:title" content={twitterData.title} />
+  <meta name="twitter:description" content={twitterData.description} />
+  <meta name="twitter:image" content={twitterData.image} />
+  {#if twitterData.creator}
+    <meta name="twitter:creator" content={twitterData.creator} />
+  {/if}
+  
+  <!-- Structured Data -->
+  {@html `<script type="application/ld+json">${JSON.stringify(structuredData)}</script>`}
 </svelte:head>
 
 <article class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">

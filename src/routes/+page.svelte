@@ -2,16 +2,38 @@
   import { formatDate } from '../utils/client.js';
   import Pagination from '$lib/components/Pagination.svelte';
   import { page } from '$app/stores';
+  import { generateSEOTitle, generateCanonicalUrl } from '../utils/seo.js';
   
   export let data;
   
   $: ({ blogs, paginatedBlogs, pagination, featuredBlogs, recentBlogs } = data);
   $: showPaginatedSection = $page.url.searchParams.has('page') || blogs.length > 6;
+  
+  // SEO data
+  $: pageTitle = $page.url.searchParams.has('page') ? `Blog - Page ${$page.url.searchParams.get('page')}` : 'Home';
+  $: seoTitle = generateSEOTitle(pageTitle);
+  $: canonicalUrl = generateCanonicalUrl($page.url.pathname + $page.url.search);
+  $: metaDescription = showPaginatedSection 
+    ? `Browse all our blog articles - Page ${$page.url.searchParams.get('page') || '1'}` 
+    : 'Welcome to our SvelteKit blog featuring WordPress content integration. Discover insightful articles, tutorials, and stories.';
 </script>
 
 <svelte:head>
-  <title>SvelteKit Blog - Home</title>
-  <meta name="description" content="Welcome to our SvelteKit blog featuring WordPress content integration" />
+  <title>{seoTitle}</title>
+  <meta name="description" content={metaDescription} />
+  <link rel="canonical" href={canonicalUrl} />
+  
+  <!-- Open Graph -->
+  <meta property="og:title" content={seoTitle} />
+  <meta property="og:description" content={metaDescription} />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content={canonicalUrl} />
+  <meta property="og:site_name" content="SvelteKit Blog" />
+  
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content={seoTitle} />
+  <meta name="twitter:description" content={metaDescription} />
 </svelte:head>
 
 <!-- Hero Section -->

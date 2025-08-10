@@ -1,0 +1,25 @@
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://yoursite.com/sitemap.xml
+
+# Crawl delay (optional - helps prevent overwhelming your server)
+Crawl-delay: 1
+
+# Disallow admin/private areas (if any)
+# Disallow: /admin/
+# Disallow: /api/
+
+# Allow search engines to crawl CSS, JS, and images
+Allow: /*.css$
+Allow: /*.js$
+Allow: /*.png$
+Allow: /*.jpg$
+Allow: /*.jpeg$
+Allow: /*.gif$
+Allow: /*.svg$
+Allow: /*.webp$
+
+# Block access to source maps in production
+Disallow: /*.map$

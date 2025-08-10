@@ -26,3 +26,40 @@ export const siteMetadata = {
   dribbble: 'https://www.dribbble.com',
   locale: 'en-US',
 };
+
+// SEO configuration
+export const seoConfig = {
+  titleTemplate: '%s - ' + siteMetadata.headerTitle,
+  defaultTitle: siteMetadata.headerTitle,
+  defaultDescription: siteMetadata.description,
+  siteUrl: siteMetadata.siteUrl,
+  defaultImage: siteMetadata.socialBanner,
+  twitterHandle: siteMetadata.twitter ? '@' + siteMetadata.twitter.split('/').pop() : '',
+  facebookAppId: '',
+  titleSeparator: ' - ',
+  additionalMetaTags: [
+    {
+      name: 'author',
+      content: siteMetadata.author
+    },
+    {
+      name: 'viewport',
+      content: 'width=device-width, initial-scale=1.0'
+    },
+    {
+      httpEquiv: 'x-ua-compatible',
+      content: 'IE=edge'
+    }
+  ],
+  additionalLinkTags: [
+    {
+      rel: 'icon',
+      href: '/favicon.ico'
+    },
+    {
+      rel: 'alternate',
+      type: 'application/rss+xml',
+      href: `${siteMetadata.siteUrl}/rss.xml`
+    }
+  ]
+};
