@@ -56,29 +56,36 @@
 </script>
 
 {#if pagination.totalPages > 1}
-  <div class="flex items-center justify-between border-t border-gray-200 bg-white px-4 py-3 sm:px-6 rounded-lg mt-8">
-    <div class="flex flex-1 justify-between sm:hidden">
+  <div class="flex flex-col sm:flex-row items-center justify-between border-t border-gray-200 bg-white px-4 py-4 sm:px-6 rounded-lg mt-6 sm:mt-8 gap-4 sm:gap-0">
+    <!-- Mobile-first pagination info -->
+    <div class="flex items-center justify-center sm:hidden w-full order-1">
+      <p class="text-sm text-gray-700 text-center">
+        Page <span class="font-medium">{pagination.currentPage}</span> of <span class="font-medium">{pagination.totalPages}</span>
+      </p>
+    </div>
+    
+    <div class="flex flex-1 justify-between sm:hidden w-full order-2">
       <!-- Mobile pagination -->
       {#if pagination.hasPrevPage}
         <button
           on:click={() => goToPage(pagination.currentPage - 1)}
-          class="relative inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors"
+          class="relative inline-flex items-center rounded-md border border-gray-300 bg-white px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors shadow-sm"
         >
-          Previous
+          ← Previous
         </button>
       {:else}
-        <div></div>
+        <div class="w-20"></div>
       {/if}
       
       {#if pagination.hasNextPage}
         <button
           on:click={() => goToPage(pagination.currentPage + 1)}
-          class="relative ml-3 inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors"
+          class="relative inline-flex items-center rounded-md border border-gray-300 bg-white px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors shadow-sm"
         >
-          Next
+          Next →
         </button>
       {:else}
-        <div></div>
+        <div class="w-20"></div>
       {/if}
     </div>
     
@@ -101,7 +108,8 @@
           {#if pagination.hasPrevPage}
             <button
               on:click={() => goToPage(pagination.currentPage - 1)}
-              class="relative inline-flex items-center rounded-l-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0 transition-colors"
+              class="relative inline-flex items-center rounded-l-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0 transition-colors hover:text-gray-600"
+              aria-label="Previous page"
             >
               <span class="sr-only">Previous</span>
               <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
@@ -131,6 +139,7 @@
               <button
                 on:click={() => goToPage(pageNum)}
                 class="relative inline-flex items-center px-4 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0 transition-colors"
+                aria-label="Go to page {pageNum}"
               >
                 {pageNum}
               </button>
@@ -141,7 +150,8 @@
           {#if pagination.hasNextPage}
             <button
               on:click={() => goToPage(pagination.currentPage + 1)}
-              class="relative inline-flex items-center rounded-r-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0 transition-colors"
+              class="relative inline-flex items-center rounded-r-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0 transition-colors hover:text-gray-600"
+              aria-label="Next page"
             >
               <span class="sr-only">Next</span>
               <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">

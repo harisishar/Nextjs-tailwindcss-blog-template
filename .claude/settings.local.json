@@ -9,7 +9,8 @@
       "Bash(timeout 5 sleep 3)",
       "Bash(npx tailwindcss init:*)",
       "Bash(mv:*)",
-      "Bash(npm run build:*)"
+      "Bash(npm run build:*)",
+      "Bash(npm run check:*)"
     ],
     "deny": []
   }

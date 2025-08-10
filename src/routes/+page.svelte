@@ -39,37 +39,37 @@
   <meta name="twitter:description" content={metaDescription} />
 </svelte:head>
 
-<!-- Hero Section -->
-<section class="bg-gradient-to-br from-accent/10 to-accentDark/10 py-20">
+<!-- Hero Section - Only show on homepage -->
+{#if !$page.url.searchParams.has('page')}
+<section class="bg-gradient-to-br from-accent/10 to-accentDark/10 py-12 sm:py-16 md:py-20">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-    <h1 class="text-4xl md:text-6xl font-bold mb-6 text-dark">IDW Journal</h1>
-    <p class="text-xl md:text-2xl text-gray-600 mb-8 max-w-3xl mx-auto"></p>
+    <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 sm:mb-6 text-dark">IDW Journal</h1>
+    <p class="text-lg sm:text-xl md:text-2xl text-gray-600 mb-6 sm:mb-8 max-w-3xl mx-auto px-4"></p>
     <a
       href="#featured"
-      class="inline-block bg-accent hover:bg-accent/90 text-white font-semibold py-3 px-8 rounded-lg transition-colors"
+      class="inline-block bg-accent hover:bg-accent/90 text-white font-semibold py-3 px-6 sm:px-8 rounded-lg transition-colors text-sm sm:text-base"
     >
       Explore Articles
     </a>
   </div>
 </section>
+{/if}
 
-<!-- Recent Posts Section -->
-{#if recentBlogs.length > 0}
-  <section class="py-16 bg-gray-50">
+<!-- Recent Posts Section - Only show on homepage (page 1 or no page param) -->
+{#if recentBlogs.length > 0 && !$page.url.searchParams.has('page')}
+  <section class="py-8 sm:py-12 md:py-16 bg-gray-50">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex justify-between items-center mb-12">
-        <h2 class="text-3xl font-bold text-dark">Recent Articles</h2>
-        {#if !showPaginatedSection}
-          <a
-            href="/?page=1"
-            class="text-accent hover:text-accent/80 font-semibold transition-colors"
-          >
-            View All →
-          </a>
-        {/if}
+      <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8 sm:mb-12 gap-4">
+        <h2 class="text-2xl sm:text-3xl font-bold text-dark">Recent Articles</h2>
+        <a
+          href="/?page=1"
+          class="text-accent hover:text-accent/80 font-semibold transition-colors text-sm sm:text-base"
+        >
+          View All →
+        </a>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
         {#each recentBlogs as blog}
           <article
             class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow"
@@ -80,16 +80,17 @@
                   src={blog.image.src}
                   alt={blog.image.alt || blog.title}
                   class="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                  loading="lazy"
                 />
               </div>
             {/if}
 
-            <div class="p-6">
+            <div class="p-4 sm:p-6">
               {#if blog.tags?.length > 0}
                 <div class="flex flex-wrap gap-2 mb-3">
                   {#each blog.tags.slice(0, 2) as tag}
                     <span
-                      class="px-3 py-1 bg-accent/10 text-accent text-sm rounded-full"
+                      class="px-2 sm:px-3 py-1 bg-accent/10 text-accent text-xs sm:text-sm rounded-full"
                     >
                       {tag}
                     </span>
@@ -97,20 +98,20 @@
                 </div>
               {/if}
 
-              <h3 class="text-xl font-semibold mb-3 text-dark line-clamp-2">
+              <h3 class="text-lg sm:text-xl font-semibold mb-3 text-dark line-clamp-2">
                 <a href={blog.url} class="hover:text-accent transition-colors">
                   {blog.title}
                 </a>
               </h3>
 
-              <p class="text-gray-600 mb-4 line-clamp-3">
+              <p class="text-gray-600 mb-4 line-clamp-3 text-sm sm:text-base">
                 {blog.description}
               </p>
 
               <div
-                class="flex justify-between items-center text-sm text-gray-500"
+                class="flex flex-col sm:flex-row justify-between items-start sm:items-center text-xs sm:text-sm text-gray-500 gap-1 sm:gap-0"
               >
-                <span>{blog.author}</span>
+                <span class="font-medium">{blog.author}</span>
                 <span>{formatDate(blog.publishedAt)}</span>
               </div>
             </div>
@@ -123,13 +124,13 @@
 
 <!-- Paginated Articles Section -->
 {#if showPaginatedSection && paginatedBlogs.length > 0}
-  <section class="py-16">
+  <section class="py-8 sm:py-12 md:py-16">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <h2 class="text-3xl font-bold text-center mb-12 text-dark">
+      <h2 class="text-2xl sm:text-3xl font-bold text-center mb-8 sm:mb-12 text-dark">
         All Articles
       </h2>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6 lg:gap-8">
         {#each paginatedBlogs as blog}
           <article
             class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow"
@@ -141,14 +142,15 @@
                     src={blog.image.src}
                     alt={blog.image.alt || blog.title}
                     class="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                    loading="lazy"
                   />
                 </a>
               </div>
             {/if}
 
-            <div class="p-6">
+            <div class="p-4 sm:p-6">
               {#if blog.tags?.length > 0}
-                <div class="flex flex-wrap gap-2 mb-3">
+                <div class="flex flex-wrap gap-1 sm:gap-2 mb-3">
                   {#each blog.tags.slice(0, 2) as tag}
                     <span
                       class="px-2 py-1 bg-accent/10 text-accent text-xs rounded-full"
@@ -159,20 +161,20 @@
                 </div>
               {/if}
 
-              <h3 class="text-lg font-semibold mb-2 text-dark line-clamp-2">
+              <h3 class="text-base sm:text-lg font-semibold mb-2 text-dark line-clamp-2">
                 <a href={blog.url} class="hover:text-accent transition-colors">
                   {blog.title}
                 </a>
               </h3>
 
-              <p class="text-gray-600 mb-3 text-sm line-clamp-2">
+              <p class="text-gray-600 mb-3 text-xs sm:text-sm line-clamp-2">
                 {blog.description}
               </p>
 
               <div
-                class="flex justify-between items-center text-xs text-gray-500"
+                class="flex flex-col sm:flex-row justify-between items-start sm:items-center text-xs text-gray-500 gap-1 sm:gap-0"
               >
-                <span>{blog.author}</span>
+                <span class="font-medium">{blog.author}</span>
                 <span>{formatDate(blog.publishedAt)}</span>
               </div>
             </div>
