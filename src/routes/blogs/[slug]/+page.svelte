@@ -69,7 +69,7 @@
         alt={blog.image.alt || blog.title}
         class="w-full h-full object-cover"
       />
-      <div class="absolute inset-0 bg-dark/60 dark:bg-dark/40"></div>
+      <div class="absolute inset-0 bg-dark/60"></div>
     {/if}
     
     <div class="absolute inset-0 flex flex-col justify-center items-center text-center text-white p-8">
@@ -89,10 +89,10 @@
   </div>
 
   <!-- Article Meta -->
-  <div class="mb-8 pb-8 border-b border-gray-200 dark:border-gray-700">
-    <div class="flex flex-wrap items-center justify-between gap-4 text-gray-600 dark:text-gray-400">
+  <div class="mb-8 pb-8 border-b border-gray-200">
+    <div class="flex flex-wrap items-center justify-between gap-4 text-gray-600">
       <div class="flex items-center space-x-4">
-        <span class="font-semibold text-dark dark:text-light">{blog.author}</span>
+        <span class="font-semibold text-dark">{blog.author}</span>
         <span>•</span>
         <time datetime={blog.publishedAt}>
           {formatDate(blog.publishedAt)}
@@ -108,7 +108,7 @@
           {#each blog.tags as tag}
             <a 
               href={`/categories/${slug(tag)}`}
-              class="px-3 py-1 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 text-sm rounded-full hover:bg-accent hover:text-white transition-colors"
+              class="px-3 py-1 bg-gray-100 text-gray-700 text-sm rounded-full hover:bg-accent hover:text-white transition-colors"
             >
               #{tag}
             </a>
@@ -119,7 +119,7 @@
   </div>
 
   <!-- Article Content -->
-  <div class="prose prose-lg dark:prose-invert max-w-none">
+  <div class="prose prose-lg max-w-none">
     {#if isWordPress}
       {@html blog.content}
     {:else}
@@ -130,8 +130,8 @@
 
   <!-- Categories -->
   {#if blog.categories?.length > 0}
-    <div class="mt-12 pt-8 border-t border-gray-200 dark:border-gray-700">
-      <h3 class="text-lg font-semibold mb-4 text-dark dark:text-light">Categories</h3>
+    <div class="mt-12 pt-8 border-t border-gray-200">
+      <h3 class="text-lg font-semibold mb-4 text-dark">Categories</h3>
       <div class="flex flex-wrap gap-2">
         {#each blog.categories as category}
           <a 
@@ -146,7 +146,7 @@
   {/if}
 
   <!-- Navigation -->
-  <div class="mt-12 pt-8 border-t border-gray-200 dark:border-gray-700">
+  <div class="mt-12 pt-8 border-t border-gray-200">
     <div class="flex justify-between items-center">
       <a 
         href="/"

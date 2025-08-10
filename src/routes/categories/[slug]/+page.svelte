@@ -15,10 +15,10 @@
 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
   <!-- Header -->
   <div class="mb-12">
-    <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 text-dark dark:text-light">
+    <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 text-dark">
       #{currentCategory}
     </h1>
-    <p class="text-xl text-gray-600 dark:text-gray-400">
+    <p class="text-xl text-gray-600">
       {#if currentCategory === 'all'}
         Discover all our articles and expand your knowledge!
       {:else}
@@ -36,7 +36,7 @@
           class={`px-4 py-2 rounded-lg transition-colors font-medium ${
             category === currentCategory
               ? 'bg-accent text-white'
-              : 'bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-accent hover:text-white'
+              : 'bg-gray-100 text-gray-700 hover:bg-accent hover:text-white'
           }`}
         >
           {category === 'all' ? 'All' : category.replace('-', ' ')}
@@ -49,7 +49,7 @@
   {#if blogs.length > 0}
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
       {#each blogs as blog}
-        <article class="bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
+        <article class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
           {#if blog.image?.src}
             <div class="aspect-video overflow-hidden">
               <a href={blog.url}>
@@ -80,35 +80,35 @@
               </div>
             {/if}
             
-            <h2 class="text-xl font-semibold mb-3 text-dark dark:text-light">
+            <h2 class="text-xl font-semibold mb-3 text-dark">
               <a href={blog.url} class="hover:text-accent transition-colors line-clamp-2">
                 {blog.title}
               </a>
             </h2>
             
-            <p class="text-gray-600 dark:text-gray-400 mb-4 line-clamp-3">
+            <p class="text-gray-600 mb-4 line-clamp-3">
               {blog.description}
             </p>
             
-            <div class="flex justify-between items-center text-sm text-gray-500 dark:text-gray-500">
+            <div class="flex justify-between items-center text-sm text-gray-500">
               <span class="font-medium">{blog.author}</span>
               <span>{formatDate(blog.publishedAt)}</span>
             </div>
             
             {#if blog.readingTime?.text}
-              <div class="mt-2 text-sm text-gray-500 dark:text-gray-500">
+              <div class="mt-2 text-sm text-gray-500">
                 📖 {blog.readingTime.text}
               </div>
             {/if}
 
             <!-- Categories for this post -->
             {#if blog.categories?.length > 0}
-              <div class="mt-3 pt-3 border-t border-gray-100 dark:border-gray-700">
+              <div class="mt-3 pt-3 border-t border-gray-100">
                 <div class="flex flex-wrap gap-2">
                   {#each blog.categories.slice(0, 2) as category}
                     <a 
                       href={`/categories/${slug(category)}`}
-                      class="text-xs px-2 py-1 bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-400 rounded hover:bg-accent hover:text-white transition-colors"
+                      class="text-xs px-2 py-1 bg-gray-100 text-gray-600 rounded hover:bg-accent hover:text-white transition-colors"
                     >
                       {category}
                     </a>
@@ -123,10 +123,10 @@
   {:else}
     <div class="text-center py-16">
       <div class="text-6xl mb-4">📝</div>
-      <h2 class="text-2xl font-bold text-dark dark:text-light mb-4">
+      <h2 class="text-2xl font-bold text-dark mb-4">
         No articles found in this category
       </h2>
-      <p class="text-gray-600 dark:text-gray-400 mb-8">
+      <p class="text-gray-600 mb-8">
         Try exploring other categories or check back later for new content.
       </p>
       <a 

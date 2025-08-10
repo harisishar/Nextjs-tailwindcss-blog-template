@@ -5,15 +5,15 @@
 
 <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
   <div class="text-center mb-12">
-    <h1 class="text-4xl font-bold text-dark dark:text-light mb-6">
+    <h1 class="text-4xl font-bold text-dark mb-6">
       About Our Blog
     </h1>
-    <p class="text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+    <p class="text-xl text-gray-600 max-w-2xl mx-auto">
       A modern blog built with SvelteKit, styled with Tailwind CSS, and powered by WordPress GraphQL API.
     </p>
   </div>
 
-  <div class="prose prose-lg dark:prose-invert mx-auto">
+  <div class="prose prose-lg mx-auto">
     <h2>Technology Stack</h2>
     <p>
       This blog demonstrates the power of modern web technologies working together:

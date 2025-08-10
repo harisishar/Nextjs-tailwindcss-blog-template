@@ -41,26 +41,28 @@ export function generateMetaDescription(content, maxLength = 160) {
 /**
  * Generates SEO-optimized title with site name
  */
-export function generateSEOTitle(pageTitle, siteName = siteMetadata.headerTitle) {
-  if (!pageTitle) return siteName;
+export function generateSEOTitle(pageTitle, siteName = null) {
+  const finalSiteName = siteName || siteMetadata.headerTitle;
+  if (!pageTitle) return finalSiteName;
   
   // Truncate title to prevent it being too long
-  const maxTitleLength = 60 - siteName.length - 3; // Account for " - " separator
+  const maxTitleLength = 60 - finalSiteName.length - 3; // Account for " - " separator
   const truncatedTitle = truncateText(pageTitle, maxTitleLength);
   
-  return `${truncatedTitle}${seoConfig.titleSeparator}${siteName}`;
+  return `${truncatedTitle}${seoConfig.titleSeparator}${finalSiteName}`;
 }
 
 /**
  * Generates Open Graph data for social sharing
  */
-export function generateOpenGraphData(post, siteUrl = siteMetadata.siteUrl) {
+export function generateOpenGraphData(post, siteUrl = null) {
+  const finalSiteUrl = siteUrl || siteMetadata.siteUrl;
   const ogData = {
     title: post.title,
     description: generateMetaDescription(post.description || post.content, 160),
     type: 'article',
-    url: `${siteUrl}${post.url || `/blogs/${generateSlug(post.title)}`}`,
-    image: post.image?.src || `${siteUrl}${seoConfig.defaultImage}`,
+    url: `${finalSiteUrl}${post.url || `/blogs/${generateSlug(post.title)}`}`,
+    image: post.image?.src || `${finalSiteUrl}${seoConfig.defaultImage}`,
     site_name: siteMetadata.headerTitle
   };
 
@@ -82,12 +84,13 @@ export function generateOpenGraphData(post, siteUrl = siteMetadata.siteUrl) {
 /**
  * Generates Twitter Card data
  */
-export function generateTwitterCardData(post, siteUrl = siteMetadata.siteUrl) {
+export function generateTwitterCardData(post, siteUrl = null) {
+  const finalSiteUrl = siteUrl || siteMetadata.siteUrl;
   return {
     card: 'summary_large_image',
     title: post.title,
     description: generateMetaDescription(post.description || post.content, 160),
-    image: post.image?.src || `${siteUrl}${seoConfig.defaultImage}`,
+    image: post.image?.src || `${finalSiteUrl}${seoConfig.defaultImage}`,
     creator: post.author ? `@${post.author.replace(/\s+/g, '').toLowerCase()}` : seoConfig.twitterHandle
   };
 }
@@ -95,13 +98,14 @@ export function generateTwitterCardData(post, siteUrl = siteMetadata.siteUrl) {
 /**
  * Generates structured data (JSON-LD) for blog posts
  */
-export function generateStructuredData(post, siteUrl = siteMetadata.siteUrl) {
+export function generateStructuredData(post, siteUrl = null) {
+  const finalSiteUrl = siteUrl || siteMetadata.siteUrl;
   const structuredData = {
     '@context': 'https://schema.org',
     '@type': 'BlogPosting',
     headline: post.title,
     description: generateMetaDescription(post.description || post.content, 160),
-    url: `${siteUrl}${post.url || `/blogs/${generateSlug(post.title)}`}`,
+    url: `${finalSiteUrl}${post.url || `/blogs/${generateSlug(post.title)}`}`,
     datePublished: post.publishedAt ? new Date(post.publishedAt).toISOString() : new Date().toISOString(),
     dateModified: post.modifiedAt ? new Date(post.modifiedAt).toISOString() : new Date().toISOString(),
     author: {
@@ -113,7 +117,7 @@ export function generateStructuredData(post, siteUrl = siteMetadata.siteUrl) {
       name: siteMetadata.headerTitle,
       logo: {
         '@type': 'ImageObject',
-        url: `${siteUrl}${siteMetadata.siteLogo}`
+        url: `${finalSiteUrl}${siteMetadata.siteLogo}`
       }
     }
   };
@@ -140,8 +144,9 @@ export function generateStructuredData(post, siteUrl = siteMetadata.siteUrl) {
 /**
  * Generates canonical URL
  */
-export function generateCanonicalUrl(path, siteUrl = siteMetadata.siteUrl) {
-  return `${siteUrl}${path.startsWith('/') ? path : `/${path}`}`;
+export function generateCanonicalUrl(path, siteUrl = null) {
+  const finalSiteUrl = siteUrl || siteMetadata.siteUrl;
+  return `${finalSiteUrl}${path.startsWith('/') ? path : `/${path}`}`;
 }
 
 /**

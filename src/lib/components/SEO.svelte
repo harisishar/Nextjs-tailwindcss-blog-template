@@ -27,7 +27,7 @@
     description,
     type,
     url: canonicalUrl,
-    image: image || 'https://your-site.com/og-default.jpg',
+    image: image || `${$page.url.origin}/social-banner.png`,
     site_name: 'SvelteKit Blog'
   };
   
@@ -35,14 +35,14 @@
     card: image ? 'summary_large_image' : 'summary',
     title: seoTitle,
     description,
-    image: image || 'https://your-site.com/og-default.jpg'
+    image: image || `${$page.url.origin}/social-banner.png`
   };
   
   $: structuredData = article ? generateStructuredData(article) : {
     '@context': 'https://schema.org',
     '@type': 'WebSite',
     name: 'SvelteKit Blog',
-    url: 'https://your-site.com',
+    url: $page.url.origin,
     description: 'A SvelteKit blog with WordPress integration'
   };
 </script>

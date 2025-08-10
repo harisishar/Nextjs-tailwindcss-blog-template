@@ -8,7 +8,8 @@
       "Bash(rm:*)",
       "Bash(timeout 5 sleep 3)",
       "Bash(npx tailwindcss init:*)",
-      "Bash(mv:*)"
+      "Bash(mv:*)",
+      "Bash(npm run build:*)"
     ],
     "deny": []
   }
