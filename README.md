@@ -1,89 +1,216 @@
-# Next.js 13 Blog Tutorial: Build SEO Optimized Personal Blog with Next.js, Contentlayer, and Tailwind CSS 🔥
+# SvelteKit Blog with WordPress GraphQL
 
-![GitHub stars](https://img.shields.io/github/stars/codebucks27/Nextjs-tailwindcss-blog-template?style=social&logo=ApacheSpark&label=Stars)&nbsp;&nbsp;
-![GitHub forks](https://img.shields.io/github/forks/codebucks27/Nextjs-tailwindcss-blog-template?style=social&logo=KashFlow&maxAge=3600)&nbsp;&nbsp;
-![Github Followers](https://img.shields.io/github/followers/codebucks27.svg?style=social&label=Follow)&nbsp;&nbsp;<br />
+A modern blog template built with SvelteKit, Tailwind CSS, and WordPress GraphQL integration.
 
-For Demo checkout following links👇: <br />
-[Nextjs Personal Blog Website](https://create-blog-with-nextjs.vercel.app/) <br />
+## Features
 
-Starter Code Files👇: <br />
-[Nextjs Personal Blog Website Starter Code](https://github.com/codebucks27/Nextjs-contentlayer-blog) <br />
+- 🚀 **SvelteKit** - Fast, modern web framework
+- 🎨 **Tailwind CSS** - Utility-first CSS framework
+- 📝 **WordPress GraphQL** - Headless CMS integration
+- 🌙 **Dark Mode** - Built-in theme switching
+- 📱 **Responsive Design** - Mobile-first approach
+- ⚡ **Fast Performance** - Server-side rendering and caching
+- 🏷️ **Categories & Tags** - Organized content structure
+- 🔍 **SEO Optimized** - Meta tags and structured data
 
-If you want to learn how to create it please follow below tutorial👇: <br />
-https://youtu.be/1QGLHOaRLwM <br />
-[![YouTube Video Views](https://img.shields.io/youtube/views/1QGLHOaRLwM?style=social)](https://youtu.be/1QGLHOaRLwM)<br />
+## Quick Start
 
-Checkout My Personal blog: [DevDreaming](https://devdreaming.com/)<br />
+1. **Clone the repository**
+   ```bash
+   git clone <repository-url>
+   cd sveltekit-blog-template
+   ```
 
+2. **Install dependencies**
+   ```bash
+   npm install
+   ```
 
-### ⭐DO NOT FORGET TO STAR THIS REPO⭐
+3. **Configure environment variables**
+   ```bash
+   cp .env.example .env
+   ```
+   
+   Update `.env` with your WordPress GraphQL endpoint:
+   ```
+   WORDPRESS_GRAPHQL_ENDPOINT=https://your-wordpress-site.com/graphql
+   ENABLE_WORDPRESS_POSTS=true
+   MAX_WORDPRESS_POSTS=50
+   SITE_URL=http://localhost:5173
+   ```
 
-### Images of The Portfolio Website:
+4. **Start development server**
+   ```bash
+   npm run dev
+   ```
 
-#### Home
-![Nextjs Personal Blog Website](https://github.com/codebucks27/Nextjs-contentlayer-blog/blob/main/project%20images/Home-Big.png?raw=true)
+5. **Open your browser**
+   Navigate to `http://localhost:5173`
 
-#### About
-![Nextjs Personal Blog Website About Page](https://github.com/codebucks27/Nextjs-contentlayer-blog/blob/main/project%20images/About-Big.png?raw=true)
+## Project Structure
 
-#### Contact
-![Next.js Personal Blog Website Contact Page](https://github.com/codebucks27/Nextjs-contentlayer-blog/blob/main/project%20images/Cotnact-Big.png?raw=true)
-
-For more Images please check the [project images](https://github.com/codebucks27/Nextjs-contentlayer-blog/tree/main/project%20images) folder from this repo or check the demo link. 
-
-### Resources Used in This Project
-
-- Character image in the About page created by using [Bing Search[(https://www.bing.com/).
-- Lottie animation in the contact page: [from here](https://lottiefiles.com/animations/sloth-meditate-SzNofNFhYY)
-- Fonts from https://fonts.google.com/ <br />
-- Icons from https://iconify.design/ <br />
-
-### All the images used in the blogs:
-- Photo by <a href="https://unsplash.com/@kmuza?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Carlos Muza</a> on <a href="https://unsplash.com/photos/hpjSkU2UYSU?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
-- Photo by <a href="https://unsplash.com/@marvelous?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Marvin Meyer</a> on <a href="https://unsplash.com/photos/SYTO3xs06fU?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
-- Photo by <a href="https://unsplash.com/@pinjasaur?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Paul Esch-Laurent</a> on <a href="https://unsplash.com/photos/oZMUrWFHOB4?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
-- Photo by <a href="https://unsplash.com/@kellysikkema?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Kelly Sikkema</a> on <a href="https://unsplash.com/photos/-1_RZL8BGBM?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
-- Photo by <a href="https://unsplash.com/@laurenmancke?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Lauren Mancke</a> on <a href="https://unsplash.com/photos/aOC7TSLb1o8?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
-- Photo by <a href="https://unsplash.com/@lucabravo?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Luca Bravo</a> on <a href="https://unsplash.com/photos/XJXWbfSo2f0?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
-- Photo by <a href="https://unsplash.com/@wocintechchat?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Christina @ wocintechchat.com</a> on <a href="https://unsplash.com/photos/OtHEYbQXLFU?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
-- Photo by <a href="https://unsplash.com/@cdx2?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">C D-X</a> on <a href="https://unsplash.com/photos/PDX_a_82obo?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
-- Photo by <a href="https://unsplash.com/@charlesdeluvio?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">charlesdeluvio</a> on <a href="https://unsplash.com/photos/cZr2sgaxy3Q?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
-- Photo by <a href="https://unsplash.com/@emilep?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Emile Perron</a> on <a href="https://unsplash.com/photos/xrVDYZRGdw4?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
-- Photo by <a href="https://unsplash.com/@synkevych?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Roman Synkevych</a> on <a href="https://unsplash.com/photos/vXInUOv1n84?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
-
-
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
-
-## Getting Started
-
-First, run the development server:
-
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
+```
+src/
+├── lib/
+│   ├── wordpress.js     # WordPress GraphQL client
+│   ├── cache.js         # Caching utilities
+│   └── config.js        # Configuration settings
+├── routes/
+│   ├── +layout.svelte   # Main layout component
+│   ├── +page.svelte     # Home page
+│   ├── about/           # About page
+│   ├── blogs/
+│   │   └── [slug]/      # Dynamic blog post pages
+│   └── categories/
+│       └── [slug]/      # Dynamic category pages
+├── utils/
+│   └── index.js         # Utility functions
+├── app.css              # Global styles
+└── app.html             # HTML template
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## WordPress Setup
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+To use this blog template, you'll need a WordPress site with GraphQL support:
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+1. **Install WPGraphQL plugin** on your WordPress site
+2. **Enable GraphQL endpoint** (usually at `/graphql`)
+3. **Configure your endpoint** in the `.env` file
+4. **Optional:** Install additional GraphQL plugins for extended functionality
 
-## Learn More
+### Required WordPress GraphQL Schema
 
-To learn more about Next.js, take a look at the following resources:
+The template expects the following GraphQL fields to be available:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```graphql
+query GetPosts {
+  posts {
+    edges {
+      node {
+        id
+        title
+        content
+        excerpt
+        date
+        modified
+        slug
+        uri
+        status
+        author {
+          node {
+            name
+            slug
+          }
+        }
+        featuredImage {
+          node {
+            sourceUrl
+            altText
+          }
+        }
+        categories {
+          edges {
+            node {
+              name
+              slug
+            }
+          }
+        }
+        tags {
+          edges {
+            node {
+              name
+              slug
+            }
+          }
+        }
+      }
+    }
+  }
+}
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## Development
 
-## Deploy on Vercel
+### Available Scripts
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- `npm run dev` - Start development server
+- `npm run build` - Build for production
+- `npm run preview` - Preview production build
+- `npm run check` - Run Svelte checks
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+### Customization
+
+#### Styling
+- Modify `tailwind.config.js` to customize Tailwind CSS configuration
+- Update `src/app.css` for global styles
+- Colors and theme settings can be found in the Tailwind config
+
+#### Content
+- WordPress content is automatically fetched via GraphQL
+- Categories and tags are dynamically generated
+- Local content can be added by extending the utilities in `src/utils/`
+
+#### Caching
+- Built-in memory caching for WordPress content
+- Cache durations can be configured in `src/lib/cache.js`
+- Shorter cache durations in development mode
+
+## Deployment
+
+1. **Build the application**
+   ```bash
+   npm run build
+   ```
+
+2. **Deploy to your preferred hosting platform**
+   - Vercel
+   - Netlify
+   - Node.js server
+   - Static hosting (with adapter-static)
+
+3. **Update environment variables** for production
+
+## Configuration
+
+### Environment Variables
+
+| Variable | Description | Default |
+|----------|-------------|---------|
+| `WORDPRESS_GRAPHQL_ENDPOINT` | WordPress GraphQL API endpoint | `https://idw.design/graphql` |
+| `ENABLE_WORDPRESS_POSTS` | Enable/disable WordPress integration | `true` |
+| `MAX_WORDPRESS_POSTS` | Maximum posts to fetch | `50` |
+| `SITE_URL` | Your site URL | `http://localhost:5173` |
+
+### Site Metadata
+
+Update `src/lib/config.js` to customize your site information:
+
+```javascript
+export const siteMetadata = {
+  title: 'Your Blog Title',
+  author: 'Your Name',
+  description: 'Your blog description',
+  siteUrl: 'https://yourblog.com',
+  // ... other settings
+};
+```
+
+## Contributing
+
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Add tests if applicable
+5. Submit a pull request
+
+## License
+
+MIT License - see LICENSE file for details
+
+## Acknowledgments
+
+- Built with [SvelteKit](https://kit.svelte.dev/)
+- Styled with [Tailwind CSS](https://tailwindcss.com/)
+- WordPress integration via [GraphQL](https://www.wpgraphql.com/)
+- Based on the Next.js blog template structure

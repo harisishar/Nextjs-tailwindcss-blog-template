@@ -1,11 +1,17 @@
-import { compareDesc, parseISO } from "date-fns";
+import { getAllWordPressPosts } from '$lib/wordpress.js';
+import { sortBlogs, paginateBlogs, slug, formatDate } from './client.js';
 
-export const cx = (...classNames) => classNames.filter(Boolean).join(" ");
+// Re-export client-safe utilities
+export { sortBlogs, paginateBlogs, slug, formatDate };
 
-export const sortBlogs = (blogs) => {
-  return blogs
-    .slice()
-    .sort((a, b) =>
-      compareDesc(parseISO(a.publishedAt), parseISO(b.publishedAt))
-    );
+// Get all blogs (local + WordPress) - SERVER SIDE ONLY
+export const getAllBlogs = async (localBlogs = []) => {
+  try {
+    const wordpressPosts = await getAllWordPressPosts();
+    const allBlogs = [...localBlogs, ...wordpressPosts];
+    return sortBlogs(allBlogs);
+  } catch (error) {
+    console.error('Error fetching WordPress posts:', error);
+    return sortBlogs(localBlogs);
+  }
 };
